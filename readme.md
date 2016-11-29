@@ -2,8 +2,6 @@
 
 Use Ajax to load data from the [Spotify API](https://developer.spotify.com/web-api/search-item/)! 
 
-A user should be able to:
-
 ### Basic Requirements:
 
  - Enter a keyword to seach for.
