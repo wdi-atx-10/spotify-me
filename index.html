@@ -2,6 +2,10 @@
 <html>
 <head>
   <title>Spotify.me</title>
+    <script
+  src="https://code.jquery.com/jquery-3.2.1.js"
+  integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
+  crossorigin="anonymous"></script>
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -13,12 +17,12 @@
       <option value="artist">Search by artist</option>
       <option value="track">Search by track name</option>
     </select>
-    <input type="submit" value="Submit">
+    <input id="submitbutton" type="submit" value="Submit">
   </form>
   
   <ul id="results"></ul>
 
-  <script src="js/jquery.js"></script>
+ <!--  <script src="js/jquery.js"></script> -->
   <script src="js/spotify.js"></script>
 </body>
 </html>
