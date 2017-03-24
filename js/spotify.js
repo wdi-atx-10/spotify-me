@@ -1,12 +1,13 @@
 
 var offset = 0;
-var type = $('#search-type').val();
+
 $(function(){
   eventHandlers();
 })
 
 function search(){
   var url = 'https://api.spotify.com/v1/search';
+  var type = $('#search-type').val();
   var data = {
     q: $('#search-keyword').val(),
     type: $('#search-type').val(),
@@ -20,18 +21,25 @@ function search(){
   })
   .done(function(response){
     var list = $('#results');
+    var items = 'items';
     $('#results').html('');
-    function artist(){ response.artists.items.forEach(function(a){
-      list.append('<li>' + a.name + '</li>');
-       })
-     }
-    function track(){ response.tracks.items.forEach(function(a){
-      list.append('<li>' + a.name + '</li>');
-       })
-     }
+    // function artist(){
+      for(i=0;i<20;i++){
+        var a = (response+'.'+type+'.'+items+[i]);
+      }
+      // console.log(a);
+      // response.type.items.forEach(function(a){
+      list.append('<li>' + a+ '</li>');
+      //  })
+    //  }
+    // function track(){
+      // response.type.items.forEach(function(a){
+      // list.append('<li>' + a.name + '</li>');
+      //  })
+    //  }
 
-    $('#search-type').val('artist')(artist());
-    $('#search-type').val('track')(track());
+    // $('#search-type').val('artist')(artist());
+    // $('#search-type').val('track')(track());
 
     console.log('response',response);
   })
