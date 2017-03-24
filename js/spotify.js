@@ -36,14 +36,14 @@ function search(keyword, type, offset, nextUrl) {
     //displaying number of resulsts
     var displaying = $('#displaying').html('');
     if( type === 'artist'){
-        displaying.append('displaying ' + result.artists.limit + ' of ' + result.artists.total + ' <a href="' + result.artists.next + '" id="next">Next</a>');
+        displaying.append('displaying ' + result.artists.offset + ' - ' + (Number(result.artists.offset)+20) + ' of ' + result.artists.total + ' <a href="' + result.artists.next + '" id="next">Next</a>');
         setNext('artist', result.artists.next);
 
     } else if (type === 'track') {
-      displaying.append('Displaying ' + result.tracks.limit + ' of ' + result.tracks.total + ' <a href="' + result.tracks.next + '" id="next">Next</a>');
+      displaying.append('Displaying ' + result.tracks.offset + ' - ' + (Number(result.tracks.offset)+20) + ' of ' + result.tracks.total + ' <a href="' + result.tracks.next + '" id="next">Next</a>');
       setNext('track', result.tracks.next);
     }
-
+    console.log(Number(result.artists.offset)-20);
   })
   .fail(function() {
     console.log("error");
