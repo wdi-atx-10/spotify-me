@@ -1,9 +1,11 @@
 var offset = 0;
+var url = 'https://api.spotify.com/v1/search';
 
 function search(offset) {
-  var url = 'https://api.spotify.com/v1/search';
   var keyword = $('#search-keyword').val();
   var type = $('#search-type').val();
+  $('.previous').remove();
+  $('.next').remove();
 
   $.ajax({
     url: url,
@@ -15,7 +17,8 @@ function search(offset) {
   })
     .done(function(response){
       console.log(response);
-      $('#results, p, a, .next, .previous').html('');
+      $('#results, p').html('');
+
       if (type == 'artist'){
         var searchArray = response.artists.items;
         searchArray.forEach(function(artist){
@@ -26,22 +29,22 @@ function search(offset) {
           $('p').text('Showing ' + offset + '-'+ showing + ' of ' + response.artists.total);
         });
         if (response.artists.total > 20){
-          $('.next').show();
-          $('.next').text('next');
+          $('p').after('<button class="next">next</button>');
           $('.next').click(function(){
-            offset= offset + 20;
+            offset+= 20;
             search(offset);
             });
           if (offset > 0){
-            $('.previous').show();
-            $('.previous').text('previous');
+            $('p').after('<button class="previous">previous</button>');
             $('.previous').click(function(){
-              offset= offset - 20;
+              offset-= 20;
               search(offset);
+
             });
           };
         };
-      } else{
+      };
+      if (type == 'track'){
           var searchArray = response.tracks.items;
           searchArray.forEach(function(tracks){
             var li = $('<li />');
@@ -50,18 +53,17 @@ function search(offset) {
             var showing = searchArray.length + offset;
             $('p').text('Showing ' + offset + '-' + showing + ' of ' + response.artists.total);
             if (response.tracks.total > 20){
-              $('.next').show();
-              $('.next').text('next');
+              $('p').after('<button class="next">next</button>');
               $('.next').click(function(){
-                offset= offset + 20;
+                offset+= 20;
                 search(offset);
                 });
               if (offset > 0){
-                $('.previous').show();
-                $('.previous').text('previous');
+                $('p').after('<button class="previous">previous</button>');
                 $('.previous').click(function(){
-                  offset= offset - 20;
+                  offset-= 20;
                   search(offset);
+
                 });
               };
             };
@@ -76,7 +78,6 @@ function search(offset) {
 
 function main(){
   $('#search').on('submit',function(e){
-    $('.next, .previous').hide();
     e.preventDefault();
     offset = 0;
     search(offset);
@@ -84,6 +85,5 @@ function main(){
 }
 
 $(function(){
-  $('.next, .previous').hide();
   main();
 });
