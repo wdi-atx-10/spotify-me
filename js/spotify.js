@@ -3,7 +3,7 @@
 
 
 function search(keyword, type, offset, nextUrl) {
-  var url = 'https://api.spotify.com/v1/search';
+  var url = nextUrl || 'https://api.spotify.com/v1/search';
   var offsetVal = offset ? offset : 0;
 
   data = {q: keyword,
@@ -33,15 +33,17 @@ function search(keyword, type, offset, nextUrl) {
         list.append('<li>' + a.name+ '</li>');
       })
     }
+    //displaying number of resulsts
+    var displaying = $('#displaying').html('');
     if( type === 'artist'){
-        list.after('Displaying ' + result.artists.limit + ' of ' + result.artists.total + ' <a href="' + result.artists.next + '" id="next">Next</a>')
-        console.log(result);
+        displaying.append('displaying ' + result.artists.limit + ' of ' + result.artists.total + ' <a href="' + result.artists.next + '" id="next">Next</a>');
+        setNext('artist', result.artists.next);
 
     } else if (type === 'track') {
-      list.after('Displaying ' + result.artists.limit + ' of ' + result.artists.total);
+      displaying.append('Displaying ' + result.tracks.limit + ' of ' + result.tracks.total + ' <a href="' + result.tracks.next + '" id="next">Next</a>');
+      setNext('track', result.tracks.next);
     }
 
-    console.log(list);
   })
   .fail(function() {
     console.log("error");
@@ -59,6 +61,17 @@ function eventHandlers(){
     query = $('#search-keyword').val();
     type = $('#search-type').val();
     search(query, type);
+  })
+
+
+}
+
+function setNext(type, newUrl){
+    $('#next').on('click', function(e){
+    e.preventDefault();
+
+    search(null, type, null, newUrl);
+
   })
 }
 
