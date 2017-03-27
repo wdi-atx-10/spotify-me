@@ -1,12 +1,56 @@
-// API Docs at: 
-// https://developer.spotify.com/web-api/search-item/
 
+var offset = 0;
 
-function searchByArtist(keyword) {
-  var url = 'https://api.spotify.com/v1/search?q='+keyword+'&type=artist';
+$(function(){
+  eventHandlers();
+})
+
+function search(){
+  var url = 'https://api.spotify.com/v1/search';
+  var type = $('#search-type').val();
+  var data = {
+    q: $('#search-keyword').val(),
+    type: $('#search-type').val(),
+    offset: offset ? offset : 0
+  };
+  a = $.ajax({
+    url: url,
+    type: 'GET',
+    dataType: 'json',
+    data: data
+  })
+  .done(function(response){
+    var list = $('#results');
+    var items = 'items';
+    $('#results').html('');
+    // function artist(){
+      for(i=0;i<20;i++){
+        var a = (response+'.'+type+'.'+items+[i]);
+      }
+      // console.log(a);
+      // response.type.items.forEach(function(a){
+      list.append('<li>' + a+ '</li>');
+      //  })
+    //  }
+    // function track(){
+      // response.type.items.forEach(function(a){
+      // list.append('<li>' + a.name + '</li>');
+      //  })
+    //  }
+
+    // $('#search-type').val('artist')(artist());
+    // $('#search-type').val('track')(track());
+
+    console.log('response',response);
+  })
+
+  .fail(function(error){
+    console.log('error',error);
+  })
 }
-
-
-function searchByTrack(keyword) {
-  var url = 'https://api.spotify.com/v1/search?q='+keyword+'&type=track';
+function eventHandlers(){
+  $('#submitMe').on('click', function(e){
+    e.preventDefault();
+    search();
+  })
 }
