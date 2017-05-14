@@ -9,6 +9,26 @@ form {
   padding: 10px 25px;
 }
 
+form {
+    background-color: #006600;
+    -webkit-animation-name: example; /* Safari 4.0 - 8.0 */
+    -webkit-animation-duration: 4s; /* Safari 4.0 - 8.0 */
+    animation-name: example;
+    animation-duration: 4s;
+}
+
+/* Safari 4.0 - 8.0 */
+@-webkit-keyframes example {
+    from {background-color: #006600;}
+    to {background-color: #e6ffe6;}
+}
+
+/* Standard syntax */
+@keyframes example {
+    from {background-color: #006600;}
+    to {background-color: #e6ffe6;}
+}
+
 h1 {
   margin: 0;
 }
