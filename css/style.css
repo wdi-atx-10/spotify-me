@@ -1,12 +1,28 @@
 body {
-  font: 16px/1.5 Helvetica Neue, Helvetica, sans-serif;
+  font: 20px/1.5 Helvetica Neue, Helvetica, sans-serif;
   margin: 0;
 }
 
 form {
-  background-color: black;
+  background-color: #006600;
+    -webkit-animation-name: spotify; /* Safari 4.0 - 8.0 */
+    -webkit-animation-duration: 4s; /* Safari 4.0 - 8.0 */
+    animation-name: spotify;
+    animation-duration: 4s;
   color: #fff;
   padding: 10px 25px;
+}
+
+/* Safari 4.0 - 8.0 */
+@-webkit-keyframes spotify {
+    from {background-color: #006600;}
+    to {background-color: #e6ffe6;}
+}
+
+/* Standard syntax */
+@keyframes spotify {
+    from {background-color: #006600;}
+    to {background-color: #e6ffe6;}
 }
 
 h1 {
